@@ -5,9 +5,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class PostsService {
-
-  url = 'http://localhost:8080/api/posts';
+export class CommentService {
+  url = 'http://localhost:8080/api/comments';
 
   constructor(private readonly authService: AuthService, private http: HttpClient) {
   }
@@ -20,26 +19,10 @@ export class PostsService {
     return this.http.post<any>(`${this.url}/create`, data, {headers});
   }
 
-  getById(id: string){
-    return this.http.get<any[]>(`${this.url}/findById/${id}`)
-  }
-
-  getAll(){
-    return this.http.get<any[]>(`${this.url}/getAll`)
-  }
-
-  getMyPosts(){
+  delete(id: string){
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.authService.getToken()}`
     });
-    return this.http.get<any[]>(`${this.url}/findByUserId`,{headers})
+    return this.http.delete<any>(`${this.url}/delete/${id}`, {headers});
   }
-
-  delete(eventId: string){
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.authService.getToken()}`
-    });
-    return this.http.delete<any[]>(`${this.url}/delete/${eventId}`,{headers})
-  }
-
 }
