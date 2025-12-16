@@ -8,12 +8,13 @@ import java.util.List;
 import com.ubication.backend.dto.ThemeDTO;
 
 
-public record UserDTO(
+public record UpdateUserDTO(
        Long id,
             String name,
              String bio,
             String username,
             String email,
             ImageDTO image,
-             ImageDTO banner
+             ImageDTO banner,
+             String password
 ) {}
